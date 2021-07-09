@@ -11,24 +11,39 @@ public class GameLogic : MonoBehaviour
     Camera mainCamera;
     float rockHoldTime;
     Rigidbody rockRB;
-    Transform rockSpawnPoint;
+    Vector3 rockSpawnPoint;
+
+    void Start()
+    {
+        rockRB = GetComponent<Rigidbody>();
+        rockSpawnPoint = new Vector3(0, 15, 0);
+
+        RockSpawner();
+    }
 
     void RockSpawner()
     {
         // Make rocks fall in a certain position
+
+        rockRB.isKinematic = false;
+
+        /*for (int i = 0; i<1; i++) {
+            Instantiate(this.gameObject, rockSpawnPoint, Quaternion.identity);
+        }*/
         // Choose from the list of rocks
+
+
+
         // randomize rock selection
 
         Random.Range(0, Rock.Count);
-
-        rockRB = GetComponent<Rigidbody>();
     }
 
     void RockHold()
     {
         //Hold for a certain amount of time to balance rock
         //disable rb after holding
-        if(rockHoldTime <= 0)
+        if (rockHoldTime <= 0)
         {
             rockRB.isKinematic = true; // disables the physics part
             //rockspawn then reset rock hold time
