@@ -6,19 +6,19 @@ public class GameLogic : MonoBehaviour
 {
     [SerializeField] bool Fail;
     [SerializeField] bool isActiveRock;
-    [SerializeField] List<GameObject> Rock;
+    [SerializeField] private GameObject[] Rock;
+    private GameObject[] instanciatedObjects;
 
     Camera mainCamera;
     float rockHoldTime;
     Rigidbody rockRB;
     Vector3 rockSpawnPoint;
+    bool instantiated = true;
 
     void Start()
     {
         rockRB = GetComponent<Rigidbody>();
         rockSpawnPoint = new Vector3(0, 15, 0);
-
-        RockSpawner();
     }
 
     void RockSpawner()
@@ -27,16 +27,19 @@ public class GameLogic : MonoBehaviour
 
         rockRB.isKinematic = false;
 
-        /*for (int i = 0; i<1; i++) {
-            Instantiate(this.gameObject, rockSpawnPoint, Quaternion.identity);
-        }*/
+        instanciatedObjects = new GameObject[Rock.Length];
+        for (int i = 0; i < Rock.Length; i++)
+        {
+            instanciatedObjects[i] = Instantiate(Rock[i]) as GameObject;
+        }
+
         // Choose from the list of rocks
 
 
 
         // randomize rock selection
 
-        Random.Range(0, Rock.Count);
+        Random.Range(0, Rock.Length);
     }
 
     void RockHold()
@@ -61,5 +64,7 @@ public class GameLogic : MonoBehaviour
         //If fail conditoin achieve show game over screen
         //return player to main menu
         //fail if a rock fails to balance
+
+        RockSpawner();
     }
 }
