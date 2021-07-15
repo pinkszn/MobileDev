@@ -6,7 +6,8 @@ public class GameLogic : MonoBehaviour
 {
     [SerializeField] bool Fail;
     [SerializeField] bool isActiveRock;
-    [SerializeField] private GameObject[] Rock;
+    [SerializeField] private GameObject[] LRock;
+    [SerializeField] private GameObject[] HRock;
     private GameObject[] instanciatedObjects;
 
     Camera mainCamera;
@@ -27,10 +28,10 @@ public class GameLogic : MonoBehaviour
 
         rockRB.isKinematic = false;
 
-        instanciatedObjects = new GameObject[Rock.Length];
-        for (int i = 0; i < Rock.Length; i++)
+        instanciatedObjects = new GameObject[LRock.Length];
+        for (int i = 0; i < LRock.Length; i++)
         {
-            instanciatedObjects[i] = Instantiate(Rock[i]) as GameObject;
+            instanciatedObjects[i] = Instantiate(LRock[i]) as GameObject;
         }
 
         // Choose from the list of rocks
@@ -39,7 +40,7 @@ public class GameLogic : MonoBehaviour
 
         // randomize rock selection
 
-        Random.Range(0, Rock.Length);
+        Random.Range(0, LRock.Length);
     }
 
     void RockHold()
