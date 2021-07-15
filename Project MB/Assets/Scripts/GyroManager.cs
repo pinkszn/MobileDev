@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<GyroManager> : MonoBehaviour
+public class GyroManager : MonoBehaviour
 {
     [Header("Logic")]
     private Gyroscope gyro;
@@ -32,6 +32,13 @@ public class Singleton<GyroManager> : MonoBehaviour
         {
             rotation = gyro.attitude;
         }
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(500, 300, 200, 40), "Gyro rotation rate " + gyro.rotationRate);
+        GUI.Label(new Rect(500, 350, 200, 40), "Gyro attitude" + gyro.attitude);
+        GUI.Label(new Rect(500, 400, 200, 40), "Gyro enabled : " + gyro.enabled);
     }
 
 
