@@ -19,6 +19,11 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        playerControl();
+    }
+
+    protected void playerControl()
+    {
         if (SystemInfo.supportsGyroscope)
             transform.rotation = GyroToUnity(Input.gyro.attitude);
     }
