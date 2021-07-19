@@ -9,51 +9,54 @@ public class GameLogic : MonoBehaviour
     [SerializeField] private GameObject[] LRock;
     [SerializeField] private GameObject[] HRock;
     private GameObject[] instanciatedObjects;
+    GameObject previousRock;
+    GameObject currentRock;
 
     Camera mainCamera;
     float rockHoldTime;
     Rigidbody rockRB;
     Vector3 rockSpawnPoint;
+    Vector3 previousRockPositoin;
     bool instantiated = true;
 
     void Start()
     {
         rockRB = GetComponent<Rigidbody>();
-        rockSpawnPoint = new Vector3(0, 15, 0);
     }
 
     void RockSpawner()
     {
-        // Make rocks fall in a certain position
-
-        rockRB.isKinematic = false;
-
-        instanciatedObjects = new GameObject[LRock.Length];
-        for (int i = 0; i < LRock.Length; i++)
+        if(isActiveRock == false)
         {
-            instanciatedObjects[i] = Instantiate(LRock[i]) as GameObject;
+            rockSpawnPoint = new Vector3(0, 15, 0);
+            isActiveRock = true;
+            int i = Random.Range(0, LRock.Length);
+            LRock[i].transform.position = rockSpawnPoint;
+            LRock[i].GetComponentInChildren<Rigidbody>().isKinematic = false;
+            //instanciatedObjects[i] = Instantiate(LRock[i]) as GameObject;
+            Instantiate(LRock[i]);
+            currentRock = LRock[i];
+            Debug.Log(currentRock);
+            previousRockPositoin = LRock[i].transform.position;
         }
-
-        // Choose from the list of rocks
-
-
-
-        // randomize rock selection
-
-        Random.Range(0, LRock.Length);
     }
 
-    void RockHold()
+    private void OnCollisionEnter(Collision collision)
     {
-        //Hold for a certain amount of time to balance rock
-        //disable rb after holding
-        if (rockHoldTime <= 0)
+        if (collision.collider)
         {
-            rockRB.isKinematic = true; // disables the physics part
-            //rockspawn then reset rock hold time
+            RockSpawner();
         }
     }
 
+    public void RockOnContact(bool isRockStall)
+    {
+
+    }
+    void RockDrop()
+    {
+
+    }
     void CameraLock()
     {
         //increment y transform of camera per rock spawned
@@ -65,7 +68,7 @@ public class GameLogic : MonoBehaviour
         //If fail conditoin achieve show game over screen
         //return player to main menu
         //fail if a rock fails to balance
-
+        
         RockSpawner();
     }
 }

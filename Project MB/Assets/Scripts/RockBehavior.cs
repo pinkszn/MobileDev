@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class RockBehavior : PlayerInput
 {
-    bool isActive = false;
+    public bool isActive = false;
     bool isRockFailed = false;
     bool controller = false;
     float pTolerance,nTolerance;
-    
+
+    private void Update()
+    {
+        
+    }
+
     void RockControl()
     {
         if (isActive == true)
@@ -26,9 +31,22 @@ public class RockBehavior : PlayerInput
          */
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void RockOnContact(bool isRockStall)
     {
-        isActive = true;
+        if(isActive == true)
+        {
+            isRockStall = true;
+        }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider)
+        {
+            Debug.Log("Rock contact");
+            this.gameObject.GetComponent<Rigidbody>().isKinematic=true;
+            isActive = true;
+            SendMessage("RockOnContact",true);
+        }
+    }
 }
