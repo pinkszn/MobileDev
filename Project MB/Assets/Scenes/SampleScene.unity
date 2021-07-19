@@ -299,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 969822484084773100, guid: e37941f452faa854c89abcce6dee3821, type: 3}
       propertyPath: m_Constraints
-      value: 14
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 969822484084773100, guid: e37941f452faa854c89abcce6dee3821, type: 3}
       propertyPath: m_IsKinematic
@@ -359,11 +359,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4240369027299865620, guid: e37941f452faa854c89abcce6dee3821, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4703415653181306338, guid: e37941f452faa854c89abcce6dee3821, type: 3}
       propertyPath: m_Size.y
       value: 396.8415
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703415653181306338, guid: e37941f452faa854c89abcce6dee3821, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4703415653181306338, guid: e37941f452faa854c89abcce6dee3821, type: 3}
       propertyPath: m_Center.y
@@ -373,7 +377,8 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 13400000, guid: 09ca88e60a3a90a4ab48a9f93580af3c, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8764952198196582216, guid: e37941f452faa854c89abcce6dee3821, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e37941f452faa854c89abcce6dee3821, type: 3}
 --- !u!1 &963194225
 GameObject:

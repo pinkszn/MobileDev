@@ -5,10 +5,11 @@ using UnityEngine;
 public class GameLogic : MonoBehaviour
 {
     [SerializeField] bool Fail;
-    [SerializeField] bool isActiveRock;
+    [SerializeField] protected bool isActiveRock;
     [SerializeField] private GameObject[] LRock;
     [SerializeField] private GameObject[] HRock;
     private GameObject[] instanciatedObjects;
+    GameObject tempRock;
     GameObject previousRock;
     GameObject currentRock;
 
@@ -17,46 +18,29 @@ public class GameLogic : MonoBehaviour
     Rigidbody rockRB;
     Vector3 rockSpawnPoint;
     Vector3 previousRockPositoin;
-    bool instantiated = true;
 
     void Start()
     {
         rockRB = GetComponent<Rigidbody>();
     }
 
-    void RockSpawner()
+    protected void RockSpawner()
     {
         if(isActiveRock == false)
         {
             rockSpawnPoint = new Vector3(0, 15, 0);
             isActiveRock = true;
             int i = Random.Range(0, LRock.Length);
-            LRock[i].transform.position = rockSpawnPoint;
-            LRock[i].GetComponentInChildren<Rigidbody>().isKinematic = false;
-            //instanciatedObjects[i] = Instantiate(LRock[i]) as GameObject;
-            Instantiate(LRock[i]);
-            currentRock = LRock[i];
+            tempRock = LRock[i]; // sets the current rock for player control and other methods
+            currentRock = tempRock;
+            currentRock.transform.position = rockSpawnPoint;
+            currentRock.GetComponentInChildren<Rigidbody>().isKinematic = false; // makes the rock go down
+            Instantiate(currentRock);
             Debug.Log(currentRock);
-            previousRockPositoin = LRock[i].transform.position;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider)
-        {
-            RockSpawner();
-        }
-    }
 
-    public void RockOnContact(bool isRockStall)
-    {
-
-    }
-    void RockDrop()
-    {
-
-    }
     void CameraLock()
     {
         //increment y transform of camera per rock spawned

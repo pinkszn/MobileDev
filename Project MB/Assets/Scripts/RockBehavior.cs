@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RockBehavior : PlayerInput
+public class RockBehavior : GameLogic
 {
-    public bool isActive = false;
     bool isRockFailed = false;
     bool controller = false;
     float pTolerance,nTolerance;
@@ -14,13 +13,6 @@ public class RockBehavior : PlayerInput
         
     }
 
-    void RockControl()
-    {
-        if (isActive == true)
-        {
-            playerControl();
-        }
-    }
 
     void controlTolerance()
     {
@@ -31,22 +23,12 @@ public class RockBehavior : PlayerInput
          */
     }
 
-    public void RockOnContact(bool isRockStall)
-    {
-        if(isActive == true)
-        {
-            isRockStall = true;
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider)
         {
             Debug.Log("Rock contact");
             this.gameObject.GetComponent<Rigidbody>().isKinematic=true;
-            isActive = true;
-            SendMessage("RockOnContact",true);
         }
     }
 }
