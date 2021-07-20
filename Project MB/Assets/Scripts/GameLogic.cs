@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameLogic : MonoBehaviour
+/*public class Singleton<GameLogic> : MonoBehaviour
 {
     [SerializeField] bool Fail;
     [SerializeField] protected bool isActiveRock;
@@ -55,4 +55,4 @@ public class GameLogic : MonoBehaviour
         
         RockSpawner();
     }
-}
+}*/

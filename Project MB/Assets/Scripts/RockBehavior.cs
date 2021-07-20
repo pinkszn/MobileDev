@@ -2,18 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RockBehavior : GameLogic
+public class RockBehavior : MonoBehaviour
 {
+    Rigidbody rockRB;
     bool isRockFailed = false;
     bool controller = false;
+    bool rockContact = false;
+
+    bool gameOver;
+    bool ignoreCollision;
+    bool ignoreTrigger;
+
     float pTolerance,nTolerance;
 
-    private void Update()
+    private void Awake()
     {
-        
+        rockRB = GetComponent<Rigidbody>();
     }
 
-
+    private void Start()
+    {
+        this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        PlayerInput.instance.currentRock = this;
+    }
     void controlTolerance()
     {
         /*
@@ -23,12 +34,49 @@ public class RockBehavior : GameLogic
          */
     }
 
+    void Landed()
+    {
+        if (isRockFailed)
+            return;
+
+        ignoreCollision = true;
+        ignoreTrigger = true;
+
+        PlayerInput.instance.SpawnNewRock();
+        PlayerInput.instance.MoveCamera();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider)
+        if (ignoreCollision)
+            return;
+
+        if (collision.collider) 
         {
-            Debug.Log("Rock contact");
+            Invoke("Landed", 1f);
+            ignoreCollision = true;
+            rockContact = true;
             this.gameObject.GetComponent<Rigidbody>().isKinematic=true;
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (ignoreTrigger)
+            return;
+
+        if(other.tag == "GameOver")
+        {
+            CancelInvoke("Landed");
+            isRockFailed = true;
+            ignoreTrigger = true;
+            Invoke("RestartGame",2f);
+        }
+
+    }
+
+    void RestartGame()
+    {
+        PlayerInput.instance.RestartGame();        
     }
 }
