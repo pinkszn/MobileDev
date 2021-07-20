@@ -41,9 +41,8 @@ public class RockBehavior : MonoBehaviour
 
         ignoreCollision = true;
         ignoreTrigger = true;
-
-        PlayerInput.instance.SpawnNewRock();
         PlayerInput.instance.MoveCamera();
+        PlayerInput.instance.SpawnNewRock();
     }
 
     private void OnCollisionEnter(Collision collision)

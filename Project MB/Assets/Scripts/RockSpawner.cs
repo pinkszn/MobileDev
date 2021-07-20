@@ -6,7 +6,6 @@ public class RockSpawner : MonoBehaviour
 {
     //public GameObject rockPrefab;
     [SerializeField] GameObject[] LRock;
-    [SerializeField] GameObject[] HRock;
     public void SpawnRock()
     {
         int i = Random.Range(0, LRock.Length);
