@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -7,6 +8,7 @@ public class PlayerInput : MonoBehaviour
     public static PlayerInput instance;
     public RockSpawner rockSpawner;
     [HideInInspector] public RockBehavior currentRock;
+    public TMP_Text scoreText;
 
     public CameraFollow cameraScript;
     private int moveCount;
@@ -26,6 +28,8 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
+        scoreText.SetText("Score: " + RockBehavior.RockPoints.ToString());
+        DetectInput();
         DetectInput();
     }
 

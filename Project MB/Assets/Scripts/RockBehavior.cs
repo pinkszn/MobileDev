@@ -7,6 +7,7 @@ public class RockBehavior : MonoBehaviour
     private float minX = -5.5f, maxX = 5.5f;
     bool canMove;
     float moveSpeed = 5f;
+    public static int RockPoints = 0;
 
     Rigidbody rockRB;
     bool isRockFailed = false;
@@ -60,6 +61,7 @@ public class RockBehavior : MonoBehaviour
         if (gameOver)
             return;
 
+        RockPoints++;
         ignoreCollision = true;
         ignoreTrigger = true;
         PlayerInput.instance.SpawnNewRock();
@@ -71,7 +73,8 @@ public class RockBehavior : MonoBehaviour
         if (ignoreCollision)
             return;
 
-        if (collision.collider) 
+
+        if (collision.gameObject.tag == "Platform" || collision.gameObject.tag =="Rock") 
         {
             Invoke("Landed", 1f);
             ignoreCollision = true;
