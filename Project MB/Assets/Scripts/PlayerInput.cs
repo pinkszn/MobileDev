@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
         if(moveCount == 3)
         {
             moveCount = 0;
-            cameraScript.targetPos.y += 10f;
+            cameraScript.targetPos.y += 5f;
         }
     }
 

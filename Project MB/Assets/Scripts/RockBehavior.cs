@@ -100,6 +100,7 @@ public class RockBehavior : MonoBehaviour
         canMove = false;
         rockRB.useGravity = true;
     }
+
     void RestartGame()
     {
         PlayerInput.instance.RestartGame();        

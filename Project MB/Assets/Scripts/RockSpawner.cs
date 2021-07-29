@@ -12,13 +12,10 @@ public class RockSpawner : MonoBehaviour
     public void SpawnRock()
     {
         Randomizer();
-        Instantiate(LRock[i]);
+        GameObject Rock = Instantiate(LRock[i]);
         Vector3 temp = transform.position;
         temp.z = 0f;
-        temp.x = 0f;
-        temp.y = 0f;
         LRock[i].transform.position = temp;
-        
     }
 
     void Randomizer()
