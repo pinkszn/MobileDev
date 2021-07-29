@@ -74,7 +74,7 @@ public class RockBehavior : MonoBehaviour
             return;
 
 
-        if (collision.gameObject.tag == "Platform" || collision.gameObject.tag =="Rock") 
+        if (collision.gameObject.tag == "Platform" || collision.gameObject.GetComponentInChildren<RockBehavior>() || collision.gameObject.GetComponent <RockBehavior>()) 
         {
             Invoke("Landed", 1f);
             ignoreCollision = true;
@@ -83,13 +83,16 @@ public class RockBehavior : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerEnter(Collider target)
     {
         if (ignoreTrigger)
             return;
 
-        if(other.tag == "GameOver")
+        if(target.tag == "GameOver")
         {
+            PlayerInput.instance.gameOver.SetActive(true);
+            Debug.Log("GAMEOVER");
             CancelInvoke("Landed");
             isRockFailed = true;
             ignoreTrigger = true;

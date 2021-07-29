@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public static PlayerInput instance;
+
+    public GameObject gameOver;
     public RockSpawner rockSpawner;
     [HideInInspector] public RockBehavior currentRock;
     public TMP_Text scoreText;
@@ -55,6 +57,7 @@ public class PlayerInput : MonoBehaviour
 
     public void RestartGame()
     {
+        RockBehavior.RockPoints = 0;
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
