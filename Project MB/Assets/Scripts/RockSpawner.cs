@@ -8,11 +8,12 @@ public class RockSpawner : MonoBehaviour
     [SerializeField] GameObject[] LRock;
     int i;
     [SerializeField]CameraFollow cameraToFollow;
+    Camera mCamera;
 
     public void SpawnRock()
     {
         Randomizer();
-        GameObject Rock = Instantiate(LRock[i]);
+        GameObject Rock = Instantiate(LRock[i], new Vector2(LRock[i].transform.position.x, this.gameObject.transform.position.y),Quaternion.identity);
         Vector3 temp = transform.position;
         temp.z = 0f;
         LRock[i].transform.position = temp;

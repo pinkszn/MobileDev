@@ -6,7 +6,7 @@ public class RockBehavior : MonoBehaviour
 { 
     private float minX = -5.5f, maxX = 5.5f;
     bool canMove;
-    float moveSpeed = 2f;
+    float moveSpeed = 5f;
 
     Rigidbody rockRB;
     bool isRockFailed = false;
