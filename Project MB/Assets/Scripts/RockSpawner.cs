@@ -6,20 +6,22 @@ public class RockSpawner : MonoBehaviour
 {
     //public GameObject rockPrefab;
     [SerializeField] GameObject[] LRock;
+    int i;
+    [SerializeField]GameObject cameraToFollow;
     public void SpawnRock()
     {
-        int i = Random.Range(0, LRock.Length);
-
-        GameObject rock_obj = LRock[i];
+        Randomizer();
         Instantiate(LRock[i]);
         Vector3 temp = transform.position;
-        temp.z = gameObject.transform.position.z;
-
+        temp.z = 0f;
+        temp.x = 0f;
+        temp.y = 0f;
         LRock[i].transform.position = temp;
+        
     }
 
     void Randomizer()
     {
-        int i = Random.Range(0, LRock.Length);
+        i = Random.Range(0, LRock.Length);
     }
 }
