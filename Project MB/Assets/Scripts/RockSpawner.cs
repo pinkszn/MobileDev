@@ -7,7 +7,8 @@ public class RockSpawner : MonoBehaviour
     //public GameObject rockPrefab;
     [SerializeField] GameObject[] LRock;
     int i;
-    [SerializeField]GameObject cameraToFollow;
+    [SerializeField]CameraFollow cameraToFollow;
+
     public void SpawnRock()
     {
         Randomizer();

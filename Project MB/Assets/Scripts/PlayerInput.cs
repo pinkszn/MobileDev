@@ -11,19 +11,12 @@ public class PlayerInput : MonoBehaviour
     public CameraFollow cameraScript;
     private int moveCount;
 
-    public UnityEngine.Gyroscope gyro;
     private Rigidbody rb;
 
     private void Awake()
     {
         if (instance == null)
             instance = this;
-
-        if (SystemInfo.supportsGyroscope)
-        {
-            gyro = Input.gyro;
-            Input.gyro.enabled = true;
-        }
     }
 
     private void Start()
@@ -33,7 +26,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-
+        DetectInput();
     }
 
     public void SpawnNewRock()
@@ -61,14 +54,16 @@ public class PlayerInput : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
-    protected void playerControl()
+    void DetectInput()
     {
-        if (SystemInfo.supportsGyroscope)
-            transform.rotation = GyroToUnity(Input.gyro.attitude);
-    }
-
-    Quaternion GyroToUnity(Quaternion q)
-    {
-        return new Quaternion(q.x, q.y, -q.z, -q.w);
+        if (Input.touchCount>0)
+        {
+            Touch touch = Input.GetTouch(0);
+            currentRock.DropRock();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            currentRock.DropRock();
+        }
     }
 }

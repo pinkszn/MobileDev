@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RockBehavior : MonoBehaviour
-{
+{ 
+    private float minX = -5.5f, maxX = 5.5f;
+    bool canMove;
+    float moveSpeed = 2f;
+
     Rigidbody rockRB;
     bool isRockFailed = false;
     bool controller = false;
@@ -13,36 +17,53 @@ public class RockBehavior : MonoBehaviour
     bool ignoreCollision;
     bool ignoreTrigger;
 
-    float pTolerance,nTolerance;
+    private void Update()
+    {
+        MoveRock();
+    }
 
     private void Awake()
     {
         rockRB = GetComponent<Rigidbody>();
+        rockRB.useGravity = false;
     }
 
     private void Start()
     {
-        this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        canMove = true;
+        if (Random.Range(0, 2) > 0)
+        {
+            moveSpeed *= -1f;
+        }
         PlayerInput.instance.currentRock = this;
     }
-    void controlTolerance()
+
+    void MoveRock()
     {
-        /*
-         * apply adding / subtracting numbers to accelerometer to make the balancing more engaging 
-         * positive tolerance
-         * negative tolerance
-         */
+        if (canMove)
+        {
+            Vector3 temp = transform.position;
+            temp.x += moveSpeed * Time.deltaTime;
+            if (temp.x > maxX)
+            {
+                moveSpeed *= -1f;
+            }else if (temp.x < minX)
+            {
+                moveSpeed *= -1f;
+            }
+            transform.position = temp;
+        }
     }
 
     void Landed()
     {
-        if (isRockFailed)
+        if (gameOver)
             return;
 
         ignoreCollision = true;
         ignoreTrigger = true;
-        PlayerInput.instance.MoveCamera();
         PlayerInput.instance.SpawnNewRock();
+        PlayerInput.instance.MoveCamera();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -74,6 +95,11 @@ public class RockBehavior : MonoBehaviour
 
     }
 
+    public void DropRock()
+    {
+        canMove = false;
+        rockRB.useGravity = true;
+    }
     void RestartGame()
     {
         PlayerInput.instance.RestartGame();        
