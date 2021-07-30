@@ -38,7 +38,7 @@ public class PlayerInput : MonoBehaviour
                 rockSpawner.SpawnRock();
             }
 
-            if (Input.GetMouseButtonDown(0))
+            else if (Input.GetMouseButtonDown(0))
             {
                 mainMenu.SetActive(false);
                 isMainMenu = false;
@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             currentRock.DropRock();
         }
-        if (Input.GetMouseButtonDown(0))
+        else if (Input.GetMouseButtonDown(0))
         {
             currentRock.DropRock();
         }
