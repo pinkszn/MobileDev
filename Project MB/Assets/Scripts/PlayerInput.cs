@@ -30,9 +30,16 @@ public class PlayerInput : MonoBehaviour
     {
         if (isMainMenu == true)
         {
-            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began || Input.GetMouseButtonDown(0))
+            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
             {
                 Touch touch = Input.GetTouch(0);
+                mainMenu.SetActive(false);
+                isMainMenu = false;
+                rockSpawner.SpawnRock();
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
                 mainMenu.SetActive(false);
                 isMainMenu = false;
                 rockSpawner.SpawnRock();
