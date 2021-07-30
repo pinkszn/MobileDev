@@ -7,6 +7,9 @@ public class PlayerInput : MonoBehaviour
 {
     public static PlayerInput instance;
 
+    bool isMainMenu = true;
+    public GameObject mainMenu;
+
     public GameObject gameOver;
     public RockSpawner rockSpawner;
     [HideInInspector] public RockBehavior currentRock;
@@ -25,11 +28,20 @@ public class PlayerInput : MonoBehaviour
 
     private void Start()
     {
-        rockSpawner.SpawnRock();
     }
 
     private void Update()
     {
+        if (isMainMenu == true)
+        {
+            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+            {
+                Touch touch = Input.GetTouch(0);
+                mainMenu.SetActive(false);
+                isMainMenu = false;
+                rockSpawner.SpawnRock();
+            }
+        }
         DetectInput();
     }
 
