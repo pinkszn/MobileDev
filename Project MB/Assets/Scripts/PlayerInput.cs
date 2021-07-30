@@ -26,15 +26,11 @@ public class PlayerInput : MonoBehaviour
             instance = this;
     }
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         if (isMainMenu == true)
         {
-            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+            if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began || Input.GetMouseButtonDown(0))
             {
                 Touch touch = Input.GetTouch(0);
                 mainMenu.SetActive(false);
