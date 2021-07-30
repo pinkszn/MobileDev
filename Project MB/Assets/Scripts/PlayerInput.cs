@@ -30,8 +30,6 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        scoreText.SetText("Score: " + RockBehavior.RockPoints.ToString());
-        DetectInput();
         DetectInput();
     }
 
@@ -63,7 +61,7 @@ public class PlayerInput : MonoBehaviour
 
     void DetectInput()
     {
-        if (Input.touchCount>0)
+        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
         {
             Touch touch = Input.GetTouch(0);
             currentRock.DropRock();

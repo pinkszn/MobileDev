@@ -60,8 +60,9 @@ public class RockBehavior : MonoBehaviour
     {
         if (gameOver)
             return;
-
         RockPoints++;
+        RockPoints.ToString();
+        PlayerInput.instance.scoreText.SetText("Score: " + RockPoints);
         ignoreCollision = true;
         ignoreTrigger = true;
         PlayerInput.instance.SpawnNewRock();
